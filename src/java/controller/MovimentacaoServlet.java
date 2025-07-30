@@ -125,7 +125,7 @@ public class MovimentacaoServlet extends HttpServlet {
                 if (idMovimentacao >= 0) {
 
                     for (int i = 0; i < novosItens.size(); i++) {
-                        
+
                         prod = novosItens.get(i).getProduto();
                         int qtde = novosItens.get(i).getQuantidade() + prod.getQuantidade();
                         produtoDao.atualizarEstoque(prod, qtde);
@@ -328,6 +328,18 @@ public class MovimentacaoServlet extends HttpServlet {
 
             case "excluir":
 
+                int idMovim = Integer.parseInt(request.getParameter("id"));
+                Movimentacao mov1 = movimentacaoDao.buscaPorID(idMovim, Movimentacao.class);
+
+                for (int i = 0; i < mov1.getItens().size(); i++) {
+                    produto = produtoDao.buscaPorID(mov1.getItens().get(i).getProduto().getId(), Produto.class);
+                    int qtde = mov1.getItens().get(i).getQuantidade() + produto.getQuantidade();
+                    produtoDao.atualizarEstoque(produto, qtde);
+
+                }
+                
+                movimentacaoDao.excluir(idMovim, Movimentacao.class);
+
                 request.setAttribute("lista", movimentacaoDao.buscaTudo(Movimentacao.class));
                 response.sendRedirect("MovimentacaoServlet?acao=paginada");
                 break;
@@ -345,6 +357,7 @@ public class MovimentacaoServlet extends HttpServlet {
                 String tipoPesquisa = request.getParameter("pesquisa");
                 String data = request.getParameter("txtDate");
 
+                
                 request.setAttribute("lista", movimentacaoDao.filtroAvancado(txtPesquisa, tipoPesquisa));
                 request.getRequestDispatcher("paginas/movimentacao-lista.jsp").forward(request, response);
 
