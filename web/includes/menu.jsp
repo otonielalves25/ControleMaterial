@@ -17,7 +17,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Movimentação
+                     <i class="bi bi-card-list"></i>   Movimentação
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="MovimentacaoServlet?acao=novo"><i class="bi bi-arrow-down-up"></i> Atendimento solicitação</a></li>                   
@@ -32,7 +32,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Consulta
+                      <i class="bi bi-search"></i>  Consulta
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="ProdutoServlet?acao=detalhe"><i class="bi bi-database-add"></i> Material Detalhado</a></li>
@@ -47,7 +47,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Cadastro
+                      <i class="bi bi-pencil"></i>  Cadastro
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="ProdutoServlet?acao=listar"><i class="bi bi-database-add"></i> Material</a></li>
@@ -62,7 +62,7 @@
             <ul class="navbar-nav ms-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sistema
+                      <i class="bi bi-unlock"></i>  Sistema
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="UsuarioServlet?acao="><i class="bi bi-people-fill"></i> Usuários</a></li>        
@@ -74,7 +74,7 @@
             <ul class="navbar-nav ms-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sair
+                       <i class="bi bi-power"></i> Sair
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="LoginServlet?acao=sair"><i class="bi bi-box-arrow-left"></i> Sair</a></li>        

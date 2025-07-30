@@ -36,27 +36,27 @@
                     <div class="row">
                         <div class="form-group col-12">
                             <label>Nome:</label>
-                            <input type="text" name="nome" class="form-control border border-dark border-opacity-50" value="${produto.nome}" required="true">
+                            <input type="text" name="nome" class="form-control form-control-sm border border-dark border-opacity-50" value="${produto.nome}" required="true">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-2">
                             <label>Valor:</label>
-                            <input type="text" name="valor" class="form-control border border-dark border-opacity-50" value="${produto.valor}" required="true">
+                            <input type="text" name="valor" class="form-control form-control-sm border border-dark border-opacity-50" value="${produto.valor}" required="true">
                         </div>
                         <div class="form-group col-2">
                             <label>Peso:</label>
-                            <input type="number" name="peso" min="0" class="form-control border border-dark border-opacity-50" value="${produto.peso}" required="true">
+                            <input type="number" name="peso" min="0" class="form-control form-control-sm border border-dark border-opacity-50" value="${produto.peso}" required="true">
                         </div>
                         <div class="form-group col-2">
                             <label>Qtde:</label>
-                            <input type="number" min="0" name="quantidade" class="form-control border border-dark border-opacity-50" value="${produto.quantidade}" required="true">
+                            <input type="number" min="0" name="quantidade" class="form-control form-control-sm border border-dark border-opacity-50" value="${produto.quantidade}" required="true">
                         </div>
 
                         <div class="form-group col-2">
                             <label>Unidade</label>   
-                            <select class="form-select border border-dark border-opacity-50" aria-label="" name="unidade" id="unidade" required="true">
+                            <select class="form-select form-select-sm border border-dark border-opacity-50" aria-label="" name="unidade" id="unidade" required="true">
                                 <option value="">Selecione...</option>                       
                                 <option value="Metro" <c:if test="${produto.unidade == 'Metro'}"> selected="true"</c:if>   >Grama</option>
                                 <option value="Metro" <c:if test="${produto.unidade == 'Metro'}"> selected="true"</c:if> >Metro</option>
@@ -70,7 +70,7 @@
 
                             <div class="form-group col-4">
                                 <label>Categoria:</label>   
-                                <select class="form-select border border-dark border-opacity-50" aria-label="" name="categoria" id="categoria" required="true">
+                                <select class="form-select form-select-sm border border-dark border-opacity-50" aria-label="" name="categoria" id="categoria" required="true">
                                     <option value="">Selecione...</option>
                                 <c:forEach var="cart" items="${categorias}">
                                     <option value="${cart.id}"
@@ -85,12 +85,12 @@
                     <div class="row">
                         <div class="form-group col-3">
                             <label>Data Cadastro:</label>                 
-                            <input type="date" value="${produto.dataFormatada}" name="dataCadastro" id="dataCadastro"  class="form-control border border-dark border-opacity-50" required="true">
+                            <input type="date" value="${produto.dataFormatada}" name="dataCadastro" id="dataCadastro"  class="form-control form-control-sm border border-dark border-opacity-50" required="true">
 
                         </div>
                         <div class="form-group col-5">
                             <label>Fornecedor:</label>   
-                            <select class="form-select border border-dark border-opacity-50" aria-label="" name="fornecedor" id="fornecedor" required="true">
+                            <select class="form-select form-select-sm border border-dark border-opacity-50" aria-label="" name="fornecedor" id="fornecedor" required="true">
                                 <option value="">Selecione...</option>
                                 <c:forEach var="fornec" items="${fornecedores}">
                                     <option value="${fornec.id}"                                    
@@ -101,7 +101,7 @@
                         </div>
                         <div class="form-group col-2">
                             <label>Estado:</label>   
-                            <select class="form-select border border-dark border-opacity-50" aria-label="" name="situacao" id="situacao" required="true">
+                            <select class="form-select form-select-sm border border-dark border-opacity-50" aria-label="" name="situacao" id="situacao" required="true">
                                 <option value="">Selecione...</option>                       
                                 <option value="Novo" <c:if test="${produto.situacao == 'Novo'}"> selected="true"</c:if>   >Novo</option>
                                 <option value="Bom Estado" <c:if test="${produto.situacao == 'Bom Estado'}"> selected="true"</c:if> >Bom Estado</option>             

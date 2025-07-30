@@ -41,7 +41,8 @@ public class MovimentacaoServlet extends HttpServlet {
     private final MovimentacaoDao movimentacaoDao = new MovimentacaoDao();
     private Movimentacao movimentacao = new Movimentacao();
     private List<MovimentacaoItem> itens = new ArrayList<>();
-    private List<MovimentacaoItem> novosItens = new ArrayList<>();
+    private List<MovimentacaoItem> novosItens = new ArrayList<>();  
+    
     Setor setor;
     Produto produto;
 
@@ -69,8 +70,8 @@ public class MovimentacaoServlet extends HttpServlet {
                 movimentacao = new Movimentacao();
                 itens = new ArrayList<>();
                 novosItens = new ArrayList<>();
-                request.setAttribute("movimentacao", new Movimentacao());
-                request.setAttribute("itens", itens);
+                request.getSession().setAttribute("movimentacao", new Movimentacao());
+                request.getSession().setAttribute("itens", itens);
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
                 break;
 
@@ -108,9 +109,9 @@ public class MovimentacaoServlet extends HttpServlet {
 
                 if (!erros.isEmpty()) {
                     request.setAttribute("msgErro", erros);
-                    request.setAttribute("itens", itens);
+                    request.getSession().setAttribute("itens", itens);
                     request.setAttribute("quantos", itens.size());
-                    request.setAttribute("movimentacao", movimentacao);
+                    request.getSession().setAttribute("movimentacao", movimentacao);
                     request.getRequestDispatcher(paginaCadastro).forward(request, response);
                     return;
 
@@ -155,9 +156,9 @@ public class MovimentacaoServlet extends HttpServlet {
                 itens = new ArrayList<>();
                 novosItens = new ArrayList<>();
                 request.setAttribute("msg", "Cadastrado com sucesso.");
-                request.setAttribute("itens", itens);
+                request.getSession().setAttribute("itens", itens);
                 request.setAttribute("quantos", itens.size());
-                request.setAttribute("movimentacao", new Movimentacao());
+                request.getSession().setAttribute("movimentacao", new Movimentacao());
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
 
                 break;
@@ -173,8 +174,8 @@ public class MovimentacaoServlet extends HttpServlet {
 
                     novosItens.add(m);
                 }
-                request.setAttribute("movimentacao", movimentacao);
-                request.setAttribute("itens", itens);
+                request.getSession().setAttribute("movimentacao", movimentacao);
+                request.getSession().setAttribute("itens", itens);
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
 
                 break;
@@ -204,8 +205,8 @@ public class MovimentacaoServlet extends HttpServlet {
                 String id = request.getParameter("idSetor");
                 setor = setorDao.buscaPorID(Integer.parseInt(id), Setor.class);
                 movimentacao.setSetor(setor);
-                request.setAttribute("movimentacao", movimentacao);
-                request.setAttribute("itens", itens);
+                request.getSession().setAttribute("movimentacao", movimentacao);
+                request.getSession().setAttribute("itens", itens);
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
 
                 break;
@@ -213,16 +214,16 @@ public class MovimentacaoServlet extends HttpServlet {
                 String idM = request.getParameter("idMaterial");
                 produto = produtoDao.buscaPorID(Integer.parseInt(idM), Produto.class);
                 request.setAttribute("produto", produto);
-                request.setAttribute("movimentacao", movimentacao);
-                request.setAttribute("itens", itens);
+                request.getSession().setAttribute("movimentacao", movimentacao);
+                request.getSession().setAttribute("itens", itens);
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
                 break;
             case "alteraMaterial":
                 String idMat2 = request.getParameter("id");
                 produto = produtoDao.buscaPorID(Integer.parseInt(idMat2), Produto.class);
                 request.setAttribute("produto", produto);
-                request.setAttribute("movimentacao", movimentacao);
-                request.setAttribute("itens", movimentacao.getItens());
+                request.getSession().setAttribute("movimentacao", movimentacao);
+                request.getSession().setAttribute("itens", movimentacao.getItens());
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
                 break;
             // ADICIONA A LISTA DE MATEIRAL    
@@ -262,9 +263,9 @@ public class MovimentacaoServlet extends HttpServlet {
 
                 }
 
-                request.setAttribute("itens", itens);
+                request.getSession().setAttribute("itens", itens);
                 request.setAttribute("quantos", itens.size());
-                request.setAttribute("movimentacao", movimentacao);
+                request.getSession().setAttribute("movimentacao", movimentacao);
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
                 break;
             // ADICIONA A LISTA DE MATEIRAL      
@@ -286,8 +287,8 @@ public class MovimentacaoServlet extends HttpServlet {
                 }
 
                 request.setAttribute("itens", itens);
-                request.setAttribute("quantos", itens.size());
-                request.setAttribute("movimentacao", movimentacao);
+                request.getSession().setAttribute("quantos", itens.size());
+                request.getSession().setAttribute("movimentacao", movimentacao);
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
                 break;
 
@@ -321,8 +322,8 @@ public class MovimentacaoServlet extends HttpServlet {
                     }
                 }
 
-                request.setAttribute("itens", itens);
-                request.setAttribute("movimentacao", movimentacao);
+                request.getSession().setAttribute("itens", itens);
+                request.getSession().setAttribute("movimentacao", movimentacao);
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
                 break;
 
@@ -337,7 +338,7 @@ public class MovimentacaoServlet extends HttpServlet {
                     produtoDao.atualizarEstoque(produto, qtde);
 
                 }
-                
+
                 movimentacaoDao.excluir(idMovim, Movimentacao.class);
 
                 request.setAttribute("lista", movimentacaoDao.buscaTudo(Movimentacao.class));
@@ -357,7 +358,6 @@ public class MovimentacaoServlet extends HttpServlet {
                 String tipoPesquisa = request.getParameter("pesquisa");
                 String data = request.getParameter("txtDate");
 
-                
                 request.setAttribute("lista", movimentacaoDao.filtroAvancado(txtPesquisa, tipoPesquisa));
                 request.getRequestDispatcher("paginas/movimentacao-lista.jsp").forward(request, response);
 
