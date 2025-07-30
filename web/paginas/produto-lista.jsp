@@ -3,7 +3,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="../includes/cabecalho.jsp" />
 <jsp:include page="../includes/menu.jsp" />
-<div class="container mt-5">
+<div class="container-fluid mt-5">
 
     <div class="card p-4 rounded-4">
 
@@ -74,7 +74,10 @@
             </tbody>
         </table>
         
-        <a href="ImpressaoServlet" class="btn  btn-outline-primary w-25"><i class="bi bi-printer"></i> Imprimir</a>
+        <div class="row">
+            <a href="ImpressaoServlet" class="btn btn-outline-danger w-25"><i class="bi bi-printer"></i> Imprimir</a>
+        </div>
+        
         
         <!-- comment 
         

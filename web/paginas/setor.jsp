@@ -35,7 +35,7 @@
         
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <form class="form-sing" method="post" action="SetorServlet">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -100,7 +100,7 @@
 
                             <!-- Modal -->
                             <div class="modal fade" id="model${setor.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-lg">
                                     <form action="SetorServlet" method="post">
                                         <div class="modal-content">
                                             <div class="modal-header">

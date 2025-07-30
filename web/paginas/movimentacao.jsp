@@ -64,7 +64,7 @@
                                 </td>                            
                                 <td>${item.produto.unidade}</td>                                                                                                  
                                 <td class="text-center">                           
-                                    <a href="MovimentacaoServlet?acao=excluirLista&id=${item.produto.id}" class="btn btn-danger rounded-circle" onclick="return validarExclusao();"><i class="bi bi-x-lg"></i></a>               
+                                    <a href="MovimentacaoServlet?acao=excluirLista&id=${item.produto.id}" class="btn btn-sm btn-danger rounded-circle" onclick="return validarExclusao();"><i class="bi bi-x-lg"></i></a>               
 
 
                                 </td>
@@ -89,67 +89,66 @@
 
             </div>
             <div class="col-5 p-4 shadow-lg">
-                <form action="MovimentacaoServlet" method="post">
-                    <h3>Cadastro</h3>
+                <form action="MovimentacaoServlet" method="post">                
                     <!-- linha da localidade -->
                     <div class="row">
                         <input type="hidden" name="idSetor" value="${movimentacao.setor.id}">
                         <input type="hidden" name="idMovimentacao" value="${movimentacao.id}">
                         <div class="form-group col-7">                            
                             <label>Nome do setor</label>
-                            <input type="text" form-group class="form-control border border-dark border-opacity-50" name="setor" value="${movimentacao.setor.nome}" readonly="true" required="true">
+                            <input type="text" form-group class="form-control form-control-sm border border-dark border-opacity-50" name="setor" value="${movimentacao.setor.nome}" readonly="true" required="true">
                         </div>
                         <div class="form-group col-4">
                             <label>Tipo do setor</label>
-                            <input type="text" name="tipoSetor" class="form-control border border-dark border-opacity-50" value="${movimentacao.setor.setorTipo.nome}" readonly="true" required="true">
+                            <input type="text" name="tipoSetor" class="form-control  form-control-sm border border-dark border-opacity-50" value="${movimentacao.setor.setorTipo.nome}" readonly="true" required="true">
                         </div>
                         <div class="form-group col-1">
                             <br>
-                            <button type="button" name="acao" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modallocalidade" onclick="buscarLocalidade();" ><i class="bi bi-search"></i></button>
+                            <button type="button" name="acao" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modallocalidade" onclick="buscarLocalidade();" ><i class="bi bi-search"></i></button>
                         </div>
-                    </div>   
-                    <div class="row d-flex mt-4">
+                    </div> 
+                        
+                    <div class="row">
                         <div class="form-group col-3">
                             <label>Data:</label>
-                            <input type="date" form-group class="form-control border border-dark border-opacity-50" name="dataMovimentacao" value="${movimentacao.dataFormatada}">
+                            <input type="date" form-group class="form-control form-control-sm border border-dark border-opacity-50" name="dataMovimentacao" value="${movimentacao.dataFormatada}">
                         </div>
                         <div class="form-group col-2">
                             <label>Chamado:</label>
-                            <input type="text" form-group class="form-control border border-dark border-opacity-50" name="chamado" value="${movimentacao.chamado}">
+                            <input type="text" form-group class="form-control form-control-sm border border-dark border-opacity-50" name="chamado" value="${movimentacao.chamado}">
                         </div>
                         <div class="form-group col-7">                          
                             <label>Solicitante</label>
-                            <input type="text" form-group class="form-control border border-dark border-opacity-50" name="solicitante" value="${movimentacao.solicitante}">
+                            <input type="text" form-group class="form-control form-control-sm border border-dark border-opacity-50" name="solicitante" value="${movimentacao.solicitante}">
                         </div>                    
                     </div>
 
                     <div class="form-group col-12 mt-2">
                         <label>Executor:</label>
-                        <input type="text" class="form-control border border-dark border-opacity-50" name="executor" value="${movimentacao.executor}">
+                        <input type="text" class="form-control form-control-sm border border-dark border-opacity-50" name="executor" value="${movimentacao.executor}">
                     </div>
 
                     <div class="form-group d-flex row">
                         <div class="mb-2">
                             <label for="textArea" class="form-label">Descrição da solicitação:</label>
-                            <textarea class="form-control  border border-dark border-opacity-50" id="textArea" name="descricaoDetalhada" rows="6">${movimentacao.descricaoDetalhada}</textarea>
+                            <textarea class="form-control form-control-sm  border border-dark border-opacity-50" id="textArea" name="descricaoDetalhada" rows="6">${movimentacao.descricaoDetalhada}</textarea>
                         </div>
                     </div>
                     <div class="form-group d-flex row">
                         <div class="mb-2">
                             <label for="textArea" class="form-label">Conclusão:</label>
-                            <textarea class="form-control  border border-dark border-opacity-50" id="textArea" name="conclusao" rows="6">${movimentacao.conclusao}</textarea>
+                            <textarea class="form-control form-control-sm border border-dark border-opacity-50" id="textArea" name="conclusao" rows="6">${movimentacao.conclusao}</textarea>
                         </div>
                     </div>
                     <div class="form-group d-flex">
                         <div class="form-group col text-start">  
-                            <a href="MovimentacaoServlet?acao=paginada" class="btn btn-warning"><i class="bi bi-list-ul"></i> Listar movimentações</a> 
-                            <a href="MovimentacaoServlet?acao=novo" class="btn btn-primary" ><i class="bi bi-plus-circle"></i> Novo</a>
-                            <a href="MovimentacaoServlet?acao=novo" class="btn btn-danger"><i class="bi bi-arrow-counterclockwise"></i> Limpar </a>   
+                            <a href="MovimentacaoServlet?acao=paginada" class="btn btn-sm btn-warning"><i class="bi bi-list-ul"></i> Listar</a>                         
+                            <a href="MovimentacaoServlet?acao=novo" class="btn btn-sm btn-danger"><i class="bi bi-arrow-counterclockwise"></i> Limpar </a>   
 
                         </div>
                         <div class="form-group  col text-end">  
 
-                            <button type="submit" value="salvar" name="acao" class="btn btn-success w-25"><i class="bi bi-floppy"></i> Gravar</button>
+                            <button type="submit" value="salvar" name="acao" class="btn btn-sm btn-success"><i class="bi bi-floppy"></i> Gravar</button>
                         </div>
                     </div>
 

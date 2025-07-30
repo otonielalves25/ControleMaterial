@@ -22,14 +22,12 @@
 
                 <tr>
                     <th scope="col">Código</th>
-                    <th scope="col">Data</th>
+                    <th scope="col">Data</th>                    
+                    <th scope="col">Setor Destino</th>
                     <th scope="col">Tipo</th>
-                    <th scope="col">Destino</th>
                     <th scope="col">Solicitante</th>
                     <th scope="col">Chamado</th>
                     <th scope="col">Executores</th>
-                    <th scope="col">Cadastro Por</th>
-
                     <th scope="col">Acão</th>
                 </tr>
             </thead>
@@ -38,16 +36,15 @@
                     <tr>
                         <td>${movi.id}</td>
                         <td>${movi.dataFormatada2}</td>
-                        <td>${movi.setor.setorTipo.nome}</td>
-                        <td>${movi.setor.nome}</td>
+                         <td>${movi.setor.nome}</td>
+                        <td>${movi.setor.setorTipo.nome}</td>                       
                         <td>${movi.solicitante}</td>
                         <td>${movi.chamado}</td>
-                        <td>${movi.executor}</td>
-                        <td>${movi.usuario.nome}</td>
+                        <td>${movi.executor}</td>       
 
                         <td>                           
-                            <a href="MovimentacaoServlet?acao=excluir&id=${movi.id}" class="btn btn-danger rounded-circle" onclick="return validarExclusao();"><i class="bi bi-trash3"></i></a>               
-                            <a href="MovimentacaoServlet?acao=alterar&id=${movi.id}" class="btn btn-success rounded-circle"><i class="bi bi-pencil"></i></a>
+                            <a href="MovimentacaoServlet?acao=excluir&id=${movi.id}" class="btn btn-danger btn-sm rounded-circle" onclick="return validarExclusao();"><i class="bi bi-trash3"></i></a>               
+                            <a href="MovimentacaoServlet?acao=alterar&id=${movi.id}" class="btn btn-success btn-sm rounded-circle"><i class="bi bi-pencil"></i></a>
                         </td>
 
                     </tr>

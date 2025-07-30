@@ -234,6 +234,7 @@ public class ProdutoServlet extends HttpServlet {
 
         if (id == 0) { // NOVO ITEM
             Produto produto = new Produto(id, nome, unidade, fornecedor, categoria, pesoD, valorD, imagemB64, extencao, descricao, qtd, dataB, excluido, situacao);
+
             produtoDao.salvar(produto);
             request.setAttribute("msg", "Cadastrado com Sucesso.");
             request.setAttribute("produto", new Produto());
@@ -253,10 +254,8 @@ public class ProdutoServlet extends HttpServlet {
             produtoDao.salvar(produto);
 
             request.setAttribute("msg", "Alterado com Sucesso.");
-            request.setAttribute("produto", new Produto());
-            request.setAttribute("categorias", categoriaDao.buscaTudo(modelo.Categoria.class));
-            request.setAttribute("fornecedores", fornecedorDao.buscaTudo(modelo.Fornecedor.class));
-            request.getRequestDispatcher(paginaCadastro).forward(request, response);
+            request.setAttribute("lista", produtoDao.buscaTudo(Produto.class));
+            request.getRequestDispatcher(paginaLista).forward(request, response);
 
         }
 

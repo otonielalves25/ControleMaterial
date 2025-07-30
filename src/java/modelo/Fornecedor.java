@@ -35,11 +35,13 @@ public class Fornecedor implements Serializable {
     private String numero;
     private String cidade;
     private String bairro;
+    private String estado;
 
     public Fornecedor() {
     }
 
-    public Fornecedor(int id, String cep, String nome, String cnpj, String telefone_empresa, String contato, String telefone_contato, boolean excluido, String contato2, String telefone_contato2, String rua, String numero, String cidade, String bairro) {
+    public Fornecedor(int id, String cep, String nome, String cnpj, String telefone_empresa, String contato, 
+            String telefone_contato, boolean excluido, String contato2, String telefone_contato2, String rua, String numero, String cidade, String bairro, String estado) {
         this.id = id;
         this.cep = cep;
         this.nome = nome;
@@ -54,6 +56,8 @@ public class Fornecedor implements Serializable {
         this.numero = numero;
         this.cidade = cidade;
         this.bairro = bairro;
+        this.estado = estado;
+        
     }
 
     public String getCep() {
@@ -100,6 +104,15 @@ public class Fornecedor implements Serializable {
         return telefone_contato;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    
     public void setTelefone_contato(String telefone_contato) {
         this.telefone_contato = telefone_contato;
     }

@@ -35,5 +35,19 @@ public class SetorDao extends GenericDAO<Setor> {
         }
         return listagem;
     }
+    
+    
+        // BUSCA POR NOVO
+    public Setor buscaPorNome(String nome) {
+        Setor retultado = null;
+        em = Conexao.getConexao();
+        Query query = em.createQuery("SELECT s FROM Setor s WHERE s.nome = ?1", Setor.class);
+        query.setParameter(1, nome);
+        if (!query.getResultList().isEmpty()) {
+            retultado = (Setor) query.getResultList().get(0);
+        }
+        em.close();
+        return retultado;
+    }
 
 }

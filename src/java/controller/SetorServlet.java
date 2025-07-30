@@ -60,7 +60,7 @@ public class SetorServlet extends HttpServlet {
             ArrayList erros = new ArrayList<>();
             String nome = request.getParameter("nome");
             String tipo = request.getParameter("tipo");
-            SetorTipo tpSetor = setorTipoDao.buscaPorID(Integer.parseInt(tipo), SetorTipo.class );
+            SetorTipo tpSetor = setorTipoDao.buscaPorID(Integer.parseInt(tipo), SetorTipo.class);
             int id = (request.getParameter("id").equals("")) ? 0 : Integer.parseInt(request.getParameter("id"));
             Setor setor = new Setor();
             setor.setNome(nome);
@@ -81,6 +81,16 @@ public class SetorServlet extends HttpServlet {
 
             // fim do - testar validação do JPA
             if (id == 0) {
+
+                Setor setorT = setorDao.buscaPorNome(nome);
+                if (setorT != null) {
+                    erros.add("Setor já tem cadastrao.");
+                    request.setAttribute("erros", erros);
+                    request.setAttribute("setor", setor);
+                    retornarPagina(request, response);
+                    return;
+                }
+
                 setorDao.salvar(setor);
 
             } else {
@@ -93,22 +103,26 @@ public class SetorServlet extends HttpServlet {
             retornarPagina(request, response);
 
         } else if (acao.equalsIgnoreCase("alterar")) {
+            
             int id = Integer.parseInt(request.getParameter("id"));
             request.setAttribute("setor", setorDao.buscaPorID(id, Setor.class));
             request.setAttribute("tipos", setorTipoDao.buscaTudo(SetorTipo.class));
             retornarPagina(request, response);
 
         } else if (acao.equalsIgnoreCase("excluir")) {
+            
             int id = Integer.parseInt(request.getParameter("id"));
             setorDao.excluir(id, Setor.class);
             retornarPagina(request, response);
 
         } else {
+            
             retornarPagina(request, response);
         }
     }
 
     private void retornarPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         List<Setor> setores = setorDao.buscaTudo(Setor.class);
         // Se a lista for maior que 2 ordena 
         if (setores.size() > 1) {

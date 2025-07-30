@@ -4,10 +4,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="../includes/cabecalho.jsp" />
 <jsp:include page="../includes/menu.jsp" />
-<div class="container mt-5 col-6">
+<div class="container mt-5">
 
     <div class="card p-4 rounded-4">
-        
+
         <!-- MOSTANDO MENSAGANS NA TELA -->
         <c:if test="${msgErro != null}">
             <div class="alert alert-danger text-center" role="alert">
@@ -78,31 +78,38 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-md-3">
+                                    <label>CEP:</label>   
+                                    <input type="text" onblur="buscaCep()" name="cep" class="form-control border border-dark border-opacity-50" value="${fornecedor.cep}" placeholder="00.000-000" id="cep" >
+                                </div>
+
+                                <div class="form-group col-7">
                                     <label>Rua:</label>   
                                     <input type="text" name="rua"  class="form-control border border-dark border-opacity-50" value="${fornecedor.rua}" id="rua">
                                 </div>
+
                                 <div class="form-group col-2">
                                     <label>Numero:</label>   
                                     <input type="text" name="numero" class="form-control border border-dark border-opacity-50" value="${fornecedor.numero}" id="numero">
                                 </div>
+
+
+                            </div>
+                            <div class="row">
+
                                 <div class="form-group col-4">
                                     <label>Bairro:</label>   
                                     <input type="v" name="bairro" required="true" class="form-control border border-dark border-opacity-50" value="${fornecedor.bairro}" id="bairro">
                                 </div>
 
-                            </div>
-                            <div class="row">
+
                                 <div class="form-group col-4">
-                                    <label>CEP:</label>   
-                                    <input type="text" onblur="buscaCep()" name="cep" class="form-control border border-dark border-opacity-50" value="${fornecedor.cep}" placeholder="00.000-000" id="cep" >
-                                </div>
-
-
-
-                                <div class="form-group col-8">
                                     <label>Cidade:</label>   
                                     <input type="text" name="cidade" required="true" class="form-control border border-dark border-opacity-50" value="${fornecedor.cidade}" id="cidade">
+                                </div>
+                                <div class="form-group col-4">
+                                    <label>Estado:</label>   
+                                    <input type="text" name="estado" required="true" class="form-control border border-dark border-opacity-50" value="${fornecedor.estado}" id="estado">
                                 </div>
 
 
@@ -193,7 +200,7 @@
         var hxml = new XMLHttpRequest();
         hxml.onreadystatechange = function () {
             if (hxml.readyState == 4 && hxml.status == 200) {
-                var fornecedor = JSON.parse(hxml.responseText);
+                var fornecedor = JSON.parse(hxml.responseText);                
                 document.getElementById("id").value = fornecedor.id;
                 document.getElementById("nome").value = fornecedor.nome;
                 document.getElementById("cnpj").value = fornecedor.cnpj;
@@ -205,6 +212,7 @@
                 document.getElementById("bairro").value = fornecedor.bairro;
                 document.getElementById("cep").value = fornecedor.cep;
                 document.getElementById("cidade").value = fornecedor.cidade;
+                document.getElementById("estado").value = fornecedor.estado;
             }
 
         };
@@ -212,24 +220,24 @@
         hxml.send();
     }
 
-
+    // função que busca o cep via ajax
     function buscaCep() {
         var cep2 = document.getElementById("cep").value;
         var cep = cep2.replace(".", "").replace("-", "");
         var xCep = new XMLHttpRequest();
         xCep.onreadystatechange = function () {
             if (xCep.readyState === 4 && xCep.status === 200) {
-                var endereco = JSON.parse(xCep.responseText);
+                
+                var endereco = JSON.parse(xCep.responseText);                
+                 document.getElementById("rua").value = endereco["logradouro"];   
+                 document.getElementById("bairro").value = endereco["bairro"];   
+                 document.getElementById("cidade").value = endereco["localidade"];   
+                 document.getElementById("estado").value = endereco["estado"];   
 
-                alert(endereco.logradouro);
-                alert(endereco["complemento"]);
-                alert(endereco["bairro"]);
-                alert(endereco["localidade"]);
-                alert(endereco["uf"]);
             }
 
         };
-        xCep.open("get", "http://viacep.com.br/ws/01001000/json/", true);
+        xCep.open("get", "http://viacep.com.br/ws/" + cep + "/json/", true);
         xCep.send();
     }
 

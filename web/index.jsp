@@ -36,9 +36,8 @@
                 <div class="form-group mt-3">   
                     <button type="submit" class="btn btn-primary w-100" name="acao" value="logar"> <i class="bi bi-arrow-right-circle"></i> Entrar</button>
                 </div>
-            </form>
-            
-            <a href="ImpressaoServlet">imprimir</a>
+            </form>            
+        
             
             
 

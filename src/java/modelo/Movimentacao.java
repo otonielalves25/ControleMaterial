@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -38,21 +39,20 @@ public class Movimentacao implements Serializable {
     private String chamado;
     @Column(columnDefinition = "longtext")
     private String descricaoDetalhada;
-      @Column(columnDefinition = "longtext")
+    @Column(columnDefinition = "longtext")
     private String conclusao;
     private String protocolo;
     private String executor;
     @ManyToOne
     private Usuario usuario;
 
-
     @OneToMany(mappedBy = "movimentacao", orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<MovimentacaoItem> itens;
+    private ArrayList<MovimentacaoItem> itens = new ArrayList<>();
 
     public Movimentacao() {
     }
 
-    public Movimentacao(int id, Date dataMovimentacao, Setor setor, String solicitante, String chamado, String descricaoDetalhada,String conclusao, String protocolo, String executor, Usuario usuario) {
+    public Movimentacao(int id, Date dataMovimentacao, Setor setor, String solicitante, String chamado, String descricaoDetalhada, String conclusao, String protocolo, String executor, Usuario usuario) {
         this.id = id;
         this.dataMovimentacao = dataMovimentacao;
         this.setor = setor;
@@ -73,14 +73,12 @@ public class Movimentacao implements Serializable {
     public String getConclusao() {
         return conclusao;
     }
-    
-    
 
-    public List<MovimentacaoItem> getItens() {
+    public ArrayList<MovimentacaoItem> getItens() {
         return itens;
     }
 
-    public void setItens(List<MovimentacaoItem> itens) {
+    public void setItens(ArrayList<MovimentacaoItem> itens) {
         this.itens = itens;
     }
 

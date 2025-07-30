@@ -112,8 +112,9 @@ public class FornecedorServlet extends HttpServlet {
         String cidade = request.getParameter("cidade");
         String bairro = request.getParameter("bairro");
         String cep = request.getParameter("cep");
+        String estado = request.getParameter("estado");
 
-        Fornecedor fornecedor = new Fornecedor(id, cep, nome, cnpj, telefone_empresa, contato, telefone_contato, true, contato2, telefone_contato, rua, numero, cidade, bairro);
+        Fornecedor fornecedor = new Fornecedor(id, cep, nome, cnpj, telefone_empresa, contato, telefone_contato, true, contato2, telefone_contato, rua, numero, cidade, bairro, estado);
 
         // VALIDAR OS CAMPOS ANTES DE SALVAR
         if (fornecedorDao.buscaPorNome(nome) != null && id == 0) {

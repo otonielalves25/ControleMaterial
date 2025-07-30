@@ -42,6 +42,7 @@ public class UsuarioServlet extends HttpServlet {
         String acao = request.getParameter("acao");
 
         if (acao.equalsIgnoreCase("novo")) {
+            
             request.setAttribute("usuario", new Usuario());
             request.setAttribute("lista", usuarioDao.buscaTudo(Usuario.class));
             request.setAttribute("setores", setorDao.buscaTudo(Setor.class));
@@ -77,6 +78,8 @@ public class UsuarioServlet extends HttpServlet {
             if (id == 0) {
 
                 if (usuarioDao.consultaLogin(login)) {
+                    
+   
                     request.setAttribute("usuario", usuario);
                     request.setAttribute("msgErro", "Login: " + login + ", Já cadastro no banco.");
                     retornarPagina(request, response);
@@ -121,8 +124,10 @@ public class UsuarioServlet extends HttpServlet {
             retornarPagina(request, response);
 
         } else if (acao.equalsIgnoreCase("teste")) {
+            
             response.setContentType("text/plain");
             response.getWriter().write("Chamou o teste");
+            
             // vevifica se o login ja tem cadastro
         } else if (acao.equalsIgnoreCase("loginJaCadastrado")) {
             String cadatrado;

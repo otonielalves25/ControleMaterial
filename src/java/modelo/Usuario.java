@@ -29,7 +29,7 @@ public class Usuario implements Serializable {
     private String nome;
     private String senha;
     private String previlegio;
-    private boolean ativo;
+    private boolean ativo = Boolean.TRUE;
     private String cpf;
 
     public Usuario() {

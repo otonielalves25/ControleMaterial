@@ -37,7 +37,8 @@ public class Produto implements Serializable {
     @ManyToOne
     private Categoria categoria;
     private int peso;
-    @Column(nullable= false, precision=7, scale=2) 
+    
+    @Column(nullable= false, precision=12, scale=2) 
     private BigDecimal valor;
     @Column(columnDefinition = "LONGTEXT")
     private String imagemB64;
@@ -47,7 +48,7 @@ public class Produto implements Serializable {
     private int quantidade;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataCadastro;
-    private boolean excluido;
+    private Boolean excluido = Boolean.FALSE;
     private String situacao;  /*NOVO, USADO*/
 
     public Produto() {

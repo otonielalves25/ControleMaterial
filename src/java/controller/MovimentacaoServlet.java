@@ -41,6 +41,7 @@ public class MovimentacaoServlet extends HttpServlet {
     private final MovimentacaoDao movimentacaoDao = new MovimentacaoDao();
     private Movimentacao movimentacao = new Movimentacao();
     private List<MovimentacaoItem> itens = new ArrayList<>();
+    private List<MovimentacaoItem> novosItens = new ArrayList<>();
     Setor setor;
     Produto produto;
 
@@ -67,6 +68,7 @@ public class MovimentacaoServlet extends HttpServlet {
             case "novo":
                 movimentacao = new Movimentacao();
                 itens = new ArrayList<>();
+                novosItens = new ArrayList<>();
                 request.setAttribute("movimentacao", new Movimentacao());
                 request.setAttribute("itens", itens);
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
@@ -117,10 +119,26 @@ public class MovimentacaoServlet extends HttpServlet {
                 // fim - validar os campos necessários /////////////////////////
                 movimentacao = movimentacaoDao.salvar(movimentacao);
 
+                Produto prod;
+
+                // QUANDO FOR ALTERAÇÃO DEVERÁ DEVOLVER OS INTENS NO BANCO
+                if (idMovimentacao >= 0) {
+
+                    for (int i = 0; i < novosItens.size(); i++) {
+                        
+                        prod = novosItens.get(i).getProduto();
+                        int qtde = novosItens.get(i).getQuantidade() + prod.getQuantidade();
+                        produtoDao.atualizarEstoque(prod, qtde);
+
+                    }
+
+                }
+
                 //SALVANDO A LISTA NO BANCO
                 for (int i = 0; i < itens.size(); i++) {
 
-                    Produto prod = itens.get(i).getProduto();
+                    prod = produtoDao.buscaPorID(itens.get(i).getProduto().getId(), Produto.class);
+
                     int quant = itens.get(i).getQuantidade();
                     MovimentacaoItem item = new MovimentacaoItem(0, prod, quant, movimentacao);
 
@@ -135,6 +153,7 @@ public class MovimentacaoServlet extends HttpServlet {
                 }
 
                 itens = new ArrayList<>();
+                novosItens = new ArrayList<>();
                 request.setAttribute("msg", "Cadastrado com sucesso.");
                 request.setAttribute("itens", itens);
                 request.setAttribute("quantos", itens.size());
@@ -148,8 +167,14 @@ public class MovimentacaoServlet extends HttpServlet {
                 int idMov = Integer.parseInt(request.getParameter("id"));
                 movimentacao = movimentacaoDao.buscaPorID(idMov, Movimentacao.class);
                 itens = movimentacao.getItens();
+
+                for (MovimentacaoItem iten : itens) {
+                    MovimentacaoItem m = new MovimentacaoItem(iten.getId(), iten.getProduto(), iten.getQuantidade(), null);
+
+                    novosItens.add(m);
+                }
                 request.setAttribute("movimentacao", movimentacao);
-                request.setAttribute("itens", movimentacao.getItens());
+                request.setAttribute("itens", itens);
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
 
                 break;
@@ -177,7 +202,7 @@ public class MovimentacaoServlet extends HttpServlet {
 
             case "local_escolhido":
                 String id = request.getParameter("idSetor");
-                setor = setorDao.buscaPorID(Integer.parseInt(id), Setor.class );
+                setor = setorDao.buscaPorID(Integer.parseInt(id), Setor.class);
                 movimentacao.setSetor(setor);
                 request.setAttribute("movimentacao", movimentacao);
                 request.setAttribute("itens", itens);
@@ -186,7 +211,7 @@ public class MovimentacaoServlet extends HttpServlet {
                 break;
             case "material_escolhido":
                 String idM = request.getParameter("idMaterial");
-                produto = produtoDao.buscaPorID( Integer.parseInt(idM), Produto.class);
+                produto = produtoDao.buscaPorID(Integer.parseInt(idM), Produto.class);
                 request.setAttribute("produto", produto);
                 request.setAttribute("movimentacao", movimentacao);
                 request.setAttribute("itens", itens);
@@ -194,7 +219,7 @@ public class MovimentacaoServlet extends HttpServlet {
                 break;
             case "alteraMaterial":
                 String idMat2 = request.getParameter("id");
-                produto = produtoDao.buscaPorID(Integer.parseInt(idMat2), Produto.class );
+                produto = produtoDao.buscaPorID(Integer.parseInt(idMat2), Produto.class);
                 request.setAttribute("produto", produto);
                 request.setAttribute("movimentacao", movimentacao);
                 request.setAttribute("itens", movimentacao.getItens());
@@ -206,7 +231,7 @@ public class MovimentacaoServlet extends HttpServlet {
                 MovimentacaoItem item = new MovimentacaoItem();
                 String idP = request.getParameter("idMaterial");
                 int quantidade = Integer.parseInt(request.getParameter("quantidade"));
-                produto = produtoDao.buscaPorID(Integer.parseInt(idP), Produto.class );
+                produto = produtoDao.buscaPorID(Integer.parseInt(idP), Produto.class);
                 int quantidadeEstoque = produto.getQuantidade();
 
                 item.setProduto(produto);
@@ -246,7 +271,7 @@ public class MovimentacaoServlet extends HttpServlet {
             case "remProduto":
                 int qtdTeste;
                 MovimentacaoItem item2 = new MovimentacaoItem();
-                produto = produtoDao.buscaPorID( Integer.parseInt(request.getParameter("idMaterial")), Produto.class);
+                produto = produtoDao.buscaPorID(Integer.parseInt(request.getParameter("idMaterial")), Produto.class);
 
                 item2.setProduto(produto);
 
@@ -285,9 +310,11 @@ public class MovimentacaoServlet extends HttpServlet {
                 request.setAttribute("pagAtual", nPage);
                 request.getRequestDispatcher("paginas/movimentacao-lista.jsp").forward(request, response);
 
+                break;
+
             case "excluirLista":
                 String idMat = request.getParameter("id");
-                produto = produtoDao.buscaPorID(Integer.parseInt(idMat), Produto.class );
+                produto = produtoDao.buscaPorID(Integer.parseInt(idMat), Produto.class);
                 for (int i = 0; i < itens.size(); i++) {
                     if (itens.get(i).getProduto().getId() == produto.getId()) {
                         itens.remove(i);
@@ -299,25 +326,30 @@ public class MovimentacaoServlet extends HttpServlet {
                 request.getRequestDispatcher(paginaCadastro).forward(request, response);
                 break;
 
-            case "listar":
+            case "excluir":
 
+                request.setAttribute("lista", movimentacaoDao.buscaTudo(Movimentacao.class));
+                response.sendRedirect("MovimentacaoServlet?acao=paginada");
+                break;
+
+            case "listar":
                 request.setAttribute("lista", movimentacaoDao.buscaTudo(Movimentacao.class));
                 request.getRequestDispatcher("paginas/movimentacao-lista.jsp").forward(request, response);
 
                 break;
-                
+
             // RECEBE REQUISIÇÃO DA PAGINA FILTRAGEM    
             case "Buscar":
-                
+
                 String txtPesquisa = request.getParameter("txtPesquisa");
                 String tipoPesquisa = request.getParameter("pesquisa");
                 String data = request.getParameter("txtDate");
-                
-                
+
                 request.setAttribute("lista", movimentacaoDao.filtroAvancado(txtPesquisa, tipoPesquisa));
                 request.getRequestDispatcher("paginas/movimentacao-lista.jsp").forward(request, response);
 
                 break;
+
             case "filtroAvancado":
 
                 //request.setAttribute("lista", movimentacaoDao.buscaTudo(Movimentacao.class));
@@ -328,6 +360,7 @@ public class MovimentacaoServlet extends HttpServlet {
             default:
                 request.setAttribute("lista", movimentacaoDao.buscaTudo(Movimentacao.class));
                 request.getRequestDispatcher("paginas/movimentacao-lista.jsp").forward(request, response);
+
                 break;
         }
 

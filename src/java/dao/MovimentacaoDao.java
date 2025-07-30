@@ -17,7 +17,6 @@ import modelo.Movimentacao;
  */
 public class MovimentacaoDao extends GenericDAO<Movimentacao> {
 
-
     private EntityManager em;
 
     // BUSCA PAGINADA

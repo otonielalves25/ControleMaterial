@@ -16,12 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Produto;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRXlsExporter;
 
 ;
 
@@ -52,8 +50,7 @@ public class ImpressaoServlet extends HttpServlet {
 
         // Cria os dados para gerar
         JasperPrint jasperPrint = null;
-        byte[] bytes = null;
-        JRExporter exporter = new JRXlsExporter();
+        byte[] bytes = null;   
 
         try {
             jasperPrint = JasperFillManager.fillReport(caminhoJasper, new HashMap(), equipamentos);
@@ -63,8 +60,8 @@ public class ImpressaoServlet extends HttpServlet {
         }
 
         try {
-            bytes = JasperExportManager.exportReportToPdf(jasperPrint);
-   
+            
+            bytes = JasperExportManager.exportReportToPdf(jasperPrint);   
             
         } catch (JRException ex) {
             Logger.getLogger(ImpressaoServlet.class.getName()).log(Level.INFO, null, ex);

@@ -10,7 +10,8 @@
 
         <form action="MovimentacaoServlet" method="get">
 
-            <div class="row">
+            <div class="d-flex">
+
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="pesquisa" id="exampleRadios1" value="chamado" checked>
                     <label class="form-check-label" for="exampleRadios1">
@@ -41,23 +42,21 @@
                         Descrição
                     </label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="pesquisa" id="exampleRadios5" value="executor">
-                    <label class="form-check-label" for="exampleRadios5">
+                <div class="form-check form-check-inline me-3">
+                    <input class="form-check-input" type="radio" name="pesquisa" id="exampleRadios6" value="executor">
+                    <label class="form-check-label" for="exampleRadios6">
                         Excetor
                     </label>
                 </div>
 
-                <div class="row mt-4">
-                    <div class="col-3">
-                        <input class="form-control form-control-sm" type="text" aria-label="form-control-sm" name="txtPesquisa" id="txtPesquisa">
-                    </div>
-                    <div class="col-3">
-                        <input class="form-control form-control-sm" type="date" aria-label="form-control-sm" name="txtDate" id="txtDate">
-                    </div>
-                    <div class="col-3">
-                        <input type="submit" name="acao" value="Buscar" class="btn btn-primary">
-                    </div>
+                <div class="col-md me-2">
+                    <input class="form-control form-control-sm" type="text" aria-label="form-control-sm" name="txtPesquisa" id="txtPesquisa">
+                </div>
+                <div class="col-md-3 me-2">
+                    <input class="form-control form-control-sm" type="date" aria-label="form-control-sm" name="txtDate" id="txtDate">
+                </div>
+                <div class="col-md-2 me-2">                 
+                    <button  type="submit" name="acao" value="Buscar" class="btn btn-sm btn-primary"><i class="bi bi-search"></i> Buscar</button>
                 </div>
 
 
@@ -68,12 +67,12 @@
 </div>
 
 <script>
-    
-    function  mostraCampoData(){
-         var seg = document.querySelector('input[name=data]:checked').value;
-         alert(seg);     
-    
-    }  
+
+    function  mostraCampoData() {
+        var seg = document.querySelector('input[name=data]:checked').value;
+        alert(seg);
+
+    }
 
 </script>                          
 

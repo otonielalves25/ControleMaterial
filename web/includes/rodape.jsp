@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
     
-<div class="col text-center fixed-bottom bg-dark text-white p-3">
+<div class="col text-center fixed-bottom bg-dark text-white p-1">
     Desenvolvido por Otoniel Amancio Alves - Coogi - Detran - PR
 </div>
 

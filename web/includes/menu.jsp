@@ -28,6 +28,22 @@
                 </li>
             </ul>
 
+
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Consulta
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="ProdutoServlet?acao=detalhe"><i class="bi bi-database-add"></i> Material Detalhado</a></li>
+                        <li><a class="dropdown-item" href="ProdutoServlet?acao=listar"><i class="bi bi-database-add"></i> Material Listagem</a></li>
+
+
+                    </ul>
+                </li>
+            </ul>
+
+
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">

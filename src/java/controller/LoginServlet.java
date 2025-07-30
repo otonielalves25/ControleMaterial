@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
     // Cria o administrador no primeiro acesso    
     private Usuario createAdministrador(Usuario usuario) {
         UsuarioDao dao = new UsuarioDao();
+        
         Usuario admin = dao.autenticarUsuario(usuario);
         if (admin == null) {
             usuario.setNome("Administrador");
